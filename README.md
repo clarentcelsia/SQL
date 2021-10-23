@@ -1,4 +1,4 @@
-# SQL_HackerRank_solved
+# SQL HackerRank
 
 Check the result : https://www.db-fiddle.com/
 
