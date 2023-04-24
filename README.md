@@ -1,6 +1,7 @@
 # SQL HackerRank
 
 Check the result : https://www.db-fiddle.com/
+
 levels:
 - (#1) Easy
 - (#2) Medium
