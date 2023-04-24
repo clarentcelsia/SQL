@@ -9,5 +9,6 @@ levels:
 
 Basic (#1)
 - BasicSQL1 solves Revising the Select Query - Weather Observing Station 10
+
 Intermediate (#2)
 
