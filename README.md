@@ -2,13 +2,12 @@
 
 Check the result : https://www.db-fiddle.com/
 
-levels:
+Levels :
+- Basic (#1)
+- Intermediate (#2)
+
+Diff :
 - (#1) Easy
 - (#2) Medium
 - (#3) Hard
-
-Basic (#1)
-- BasicSQL1 solves Revising the Select Query - Weather Observing Station 10
-
-Intermediate (#2)
 
