@@ -56,3 +56,25 @@ WHERE S.SCORE=D.SCORE -- who achieved "full scores" for more than one challenge
 GROUP BY S.HACKER_ID, H.NAME -- to identify more than 1 same data/row based on grouped col 
 HAVING COUNT(*) > 1 --  query to print the respective hacker_id and name of hackers who achieved full scores for more than one challenge
 ORDER BY COUNT(*) DESC, S.HACKER_ID -- descending order by the total number of challenges
+
+-- ----------------------------------------------
+
+/* If the End_Date of the tasks are consecutive, then they are part of the same project. Samantha is interested in finding the total number of different projects completed.
+Write a query to output the start and end dates of projects listed by the number of days it took to complete the project in ascending order. If there is more than one project that have the same number of completion days, then order by the start date of the project. */
+
+-- expl. to find whether the project is consecutive or not, it's needed to figure out if the date in End_Date is also in Start_Date
+
+-- hint. another way to join multiple table implicitly without keyword 'join' is to use subquery in which can be applied after various statement of sql parts. i.e 'from/where/having/select/...'
+SELECT START_DATE, MIN(END_DATE)
+FROM 
+    -- LIT. '1ST' START_DATE WON'T EXIST IN END_DATE, THEN THE COMPLETION DAYS WILL BE THE LAST DAY IF NOT EXIST IN START_DATE 
+    (SELECT START_DATE FROM PROJECTS WHERE START_DATE NOT IN (
+        SELECT END_DATE FROM PROJECTS
+    )) SD,
+    (SELECT END_DATE FROM PROJECTS WHERE END_DATE NOT IN (
+        SELECT START_DATE FROM PROJECTS
+    )) ED
+WHERE START_DATE < END_DATE
+GROUP BY START_DATE
+-- DATEDIFF() function is used to calculate the number of days
+ORDER BY DATEDIFF(DAY, START_DATE, MIN(END_DATE)) ASC, START_DATE ASC;
