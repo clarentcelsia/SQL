@@ -41,4 +41,18 @@ G.GRADE AS GRADE, S.MARKS
 FROM GRADES G
 INNER JOIN STUDENTS S ON S.MARKS BETWEEN G.MIN_MARK AND G.MAX_MARK -- OR RIGHT JOIN
 ORDER BY G.GRADE DESC, NAME
-   
+
+
+/* query to print the respective hacker_id and name of hackers who achieved full scores for more than one challenge. 
+Order your output in descending order by the total number of challenges in which the hacker earned a full score. 
+If more than one hacker received full scores in same number of challenges, 
+then sort them by ascending hacker_id */
+SELECT S.HACKER_ID, H.NAME
+FROM SUBMISSIONS S
+INNER JOIN CHALLENGES C ON S.CHALLENGE_ID = C.CHALLENGE_ID
+INNER JOIN HACKERS H ON S.HACKER_ID = H.HACKER_ID
+INNER JOIN DIFFICULTY D ON C.DIFFICULTY_LEVEL = D.DIFFICULTY_LEVEL 
+WHERE S.SCORE=D.SCORE -- who achieved "full scores" for more than one challenge
+GROUP BY S.HACKER_ID, H.NAME -- to identify more than 1 same data/row based on grouped col 
+HAVING COUNT(*) > 1 --  query to print the respective hacker_id and name of hackers who achieved full scores for more than one challenge
+ORDER BY COUNT(*) DESC, S.HACKER_ID -- descending order by the total number of challenges
